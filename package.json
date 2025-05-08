@@ -1,0 +1,40 @@
+{
+  "name": "mytickets",
+  "version": "1.0.0",
+  "description": "Projeto base da API do MyTickets",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run migration:run && npm run seed && node dist/src/index.js",
+    "dev": "ts-node-dev src/index.ts",
+    "migration:run": "prisma migrate deploy",
+    "test": "jest --runInBand",
+    "test:coverage": "jest --coverage --runInBand",
+    "test:setup": "dotenv -e .env.test -- prisma migrate reset --force"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "@prisma/client": "^5.16.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "http-status": "^1.7.4",
+    "joi": "^17.13.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.14.10",
+    "@types/supertest": "^6.0.3",
+    "faker": "^6.6.6",
+    "jest": "^29.7.0",
+    "prisma": "^5.16.2",
+    "supertest": "^7.1.0",
+    "ts-jest": "^29.3.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
