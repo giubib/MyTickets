@@ -6,7 +6,7 @@ export type CreateTicketData = Omit<Ticket, "id" | "used">;
 
 export async function findAllEventTickets(eventId: number) {
   return await prisma.ticket.findMany({
-    where: { eventId }
+    where: { eventId },
   });
 }
 
@@ -14,8 +14,8 @@ export async function findTicketById(id: number) {
   return await prisma.ticket.findUnique({
     where: { id },
     include: {
-      Event: true
-    }
+      Event: true,
+    },
   });
 }
 
@@ -24,15 +24,15 @@ export async function findTicketByCodeForEvent(eventId: number, code: string) {
     where: {
       eventId_code: {
         code,
-        eventId
-      }
-    }
-  })
+        eventId,
+      },
+    },
+  });
 }
 
 export async function saveTicket(data: CreateTicketData) {
   return await prisma.ticket.create({
-    data
+    data,
   });
 }
 
@@ -40,7 +40,7 @@ export async function updateTicketUse(id: number) {
   return await prisma.ticket.update({
     where: { id },
     data: {
-      used: true
-    }
-  })
+      used: true,
+    },
+  });
 }

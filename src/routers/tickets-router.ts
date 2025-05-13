@@ -7,6 +7,6 @@ const ticketsRouter = Router();
 
 ticketsRouter.get("/tickets/:eventId", getEventTickets);
 ticketsRouter.post("/tickets", validateSchema(ticketSchema), postTicket);
-ticketsRouter.put("/tickets/use/:id", putTicket);
+ticketsRouter.put("/tickets/:id/use", putTicket);
 
 export default ticketsRouter;

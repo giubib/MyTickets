@@ -10,17 +10,12 @@ import {
 } from "../repositories/tickets-repository";
 import { getSpecificEvent } from "./events-service";
 
+export async function getAllTickets(eventId: number) {
+  return await findAllEventTickets(eventId);
+}
+
 export async function createNewTicket(ticketData: CreateTicketData) {
   const event = await getSpecificEvent(ticketData.eventId);
-
-  // Verifique se o evento tem uma data válida
-  if (!event || !event.date) {
-    throw {
-      type: "internal_error",
-      message: "Event not found or event date is missing.",
-    };
-  }
-
   if (isEventTicketExpired(event)) {
     throw {
       type: "forbidden",
@@ -37,9 +32,6 @@ export async function createNewTicket(ticketData: CreateTicketData) {
   }
 
   return await saveTicket(ticketData);
-}
-export async function getAllTickets(eventId: number) {
-  return await findAllEventTickets(eventId);
 }
 
 export async function useTicket(id: number) {
@@ -67,12 +59,5 @@ async function getSpecificTicket(id: number) {
 }
 
 function isEventTicketExpired(event: Event) {
-  if (!event || !event.date) {
-    throw {
-      type: "internal_error",
-      message: "Event not found or event date is missing.",
-    };
-  }
-
   return Date.now() > event.date.getTime();
 }
